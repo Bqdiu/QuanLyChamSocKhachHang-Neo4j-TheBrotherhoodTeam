@@ -1,7 +1,11 @@
-﻿using System;
+﻿using App.Models;
+using App.Neo4JConnector;
+using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace App
@@ -19,7 +23,7 @@ namespace App
      
         private void Main_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void btn_request_Click(object sender, EventArgs e)
@@ -39,8 +43,11 @@ namespace App
             SendMessage(Handle, 0x112, 0xf012, 0);
         }
 
-        private void btnHome_Click(object sender, EventArgs e)
+        private async void btnHome_Click(object sender, EventArgs e)
         {
+            N4jConnector connector = new N4jConnector();
+            List<Customer> l = await connector.GetListAyncCustomers();
+            MessageBox.Show(l[0].Name);
             OpenChildForm(new Home());
         }
 
