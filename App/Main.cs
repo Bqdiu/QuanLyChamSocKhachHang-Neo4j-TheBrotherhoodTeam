@@ -1,25 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
+using System.Drawing.Drawing2D;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace App
 {
     public partial class Main : Form
     {
-        Home home;
+        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        private static extern IntPtr CreateRoundRectRgn
+     (
+         int nLeftRect,     // x-coordinate of upper-left corner
+         int nTopRect,      // y-coordinate of upper-left corner
+         int nRightRect,    // x-coordinate of lower-right corner
+         int nBottomRect,   // y-coordinate of lower-right corner
+         int nWidthEllipse, // height of ellipse
+         int nHeightEllipse // width of ellipse
+     );
         public Main()
         {
             InitializeComponent();
-            this.FormBorderStyle = FormBorderStyle.None;    
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(10, 10, Width, Height, 10, 10));
         }
 
+     
         private void Main_Load(object sender, EventArgs e)
         {
 
@@ -44,22 +50,9 @@ namespace App
 
         private void btnHome_Click(object sender, EventArgs e)
         {
-            if(home == null)
-            {
-                home = new Home();
-                home.FormClosed += Home_Closed;
-                home.MdiParent = this;
-                home.Dock = DockStyle.Fill;
-                home.Show();
-            }else
-            {
-                home.Activate();
-            }
+            OpenChildForm(new Home());
         }
-        private void Home_Closed(object sender, FormClosedEventArgs e)
-        {
-            home = null;
-        }
+
 
         private void btnClose_Click(object sender, EventArgs e)
         {
@@ -68,7 +61,7 @@ namespace App
 
         private void btnMaximize_Click(object sender, EventArgs e)
         {
-            if(WindowState == FormWindowState.Normal)
+            if (WindowState == FormWindowState.Normal)
             {
                 WindowState = FormWindowState.Maximized;
             }
@@ -81,6 +74,24 @@ namespace App
         private void btnMinimize_Click(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Minimized;
+        }
+
+        private Form currentFormChild;
+
+        private void OpenChildForm(Form childForm)
+        {
+            if (currentFormChild != null)
+            {
+                currentFormChild.Close();
+            }
+            currentFormChild = childForm;
+            currentFormChild.TopLevel = false;
+            childForm.FormBorderStyle = FormBorderStyle.None;
+            childForm.Dock = DockStyle.Fill;
+            panelBody.Controls.Add(childForm);
+            panelBody.Tag = childForm;
+            childForm.BringToFront();
+            childForm.Show();
         }
     }
 }
