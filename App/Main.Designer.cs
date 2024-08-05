@@ -194,7 +194,7 @@
             this.flowLayoutPanel2.Controls.Add(this.btnMinimize);
             this.flowLayoutPanel2.Controls.Add(this.btnMaximize);
             this.flowLayoutPanel2.Controls.Add(this.btnClose);
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(1101, 4);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(1138, 4);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(141, 47);
             this.flowLayoutPanel2.TabIndex = 1;
