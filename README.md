@@ -1,2 +1,2 @@
 # QuanLyChamSocKhachHang-Neo4j-TheBrotherhoodTeam
-Đồ án NoSQL sử dụng Neo4j - WindowsForm (.NET Framework 4.8)
+Đồ án NoSQL sử dụng Neo4j - WindowsForm (.NET Framework 6.0)
