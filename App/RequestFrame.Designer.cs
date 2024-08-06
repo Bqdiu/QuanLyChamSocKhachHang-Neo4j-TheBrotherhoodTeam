@@ -64,7 +64,7 @@
             // 
             // dataGridView1
             // 
-            dataGridView1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            dataGridView1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             dataGridView1.BackgroundColor = System.Drawing.SystemColors.ControlLight;
             dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
@@ -87,7 +87,7 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             dataGridView1.EnableHeadersVisualStyles = false;
-            dataGridView1.Location = new System.Drawing.Point(10, 359);
+            dataGridView1.Location = new System.Drawing.Point(10, 352);
             dataGridView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             dataGridView1.MultiSelect = false;
             dataGridView1.Name = "dataGridView1";
@@ -109,7 +109,7 @@
             dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle4;
             dataGridView1.RowTemplate.Height = 29;
             dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new System.Drawing.Size(1027, 292);
+            dataGridView1.Size = new System.Drawing.Size(1027, 299);
             dataGridView1.TabIndex = 1;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
@@ -170,7 +170,7 @@
             btnEdit.BackColor = System.Drawing.Color.FromArgb(241, 239, 231);
             btnEdit.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             btnEdit.ForeColor = System.Drawing.Color.Black;
-            btnEdit.Location = new System.Drawing.Point(181, 309);
+            btnEdit.Location = new System.Drawing.Point(181, 298);
             btnEdit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             btnEdit.Name = "btnEdit";
             btnEdit.Size = new System.Drawing.Size(128, 32);
@@ -183,7 +183,7 @@
             btnAdd.BackColor = System.Drawing.Color.Black;
             btnAdd.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             btnAdd.ForeColor = System.Drawing.Color.White;
-            btnAdd.Location = new System.Drawing.Point(37, 309);
+            btnAdd.Location = new System.Drawing.Point(37, 298);
             btnAdd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new System.Drawing.Size(128, 32);
@@ -196,7 +196,7 @@
             btnDelete.BackColor = System.Drawing.Color.LightCoral;
             btnDelete.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             btnDelete.ForeColor = System.Drawing.Color.White;
-            btnDelete.Location = new System.Drawing.Point(327, 309);
+            btnDelete.Location = new System.Drawing.Point(327, 298);
             btnDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new System.Drawing.Size(128, 32);
@@ -209,7 +209,7 @@
             btnCancel.BackColor = System.Drawing.Color.Maroon;
             btnCancel.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             btnCancel.ForeColor = System.Drawing.Color.White;
-            btnCancel.Location = new System.Drawing.Point(909, 309);
+            btnCancel.Location = new System.Drawing.Point(908, 298);
             btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new System.Drawing.Size(128, 32);
@@ -222,7 +222,7 @@
             btnSave.BackColor = System.Drawing.Color.Gold;
             btnSave.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             btnSave.ForeColor = System.Drawing.Color.White;
-            btnSave.Location = new System.Drawing.Point(472, 309);
+            btnSave.Location = new System.Drawing.Point(475, 298);
             btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             btnSave.Name = "btnSave";
             btnSave.Size = new System.Drawing.Size(128, 32);
@@ -273,7 +273,7 @@
             label6.AutoSize = true;
             label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             label6.ForeColor = System.Drawing.Color.Black;
-            label6.Location = new System.Drawing.Point(37, 222);
+            label6.Location = new System.Drawing.Point(37, 213);
             label6.Name = "label6";
             label6.Size = new System.Drawing.Size(65, 15);
             label6.TabIndex = 40;
@@ -281,7 +281,7 @@
             // 
             // tbSerID
             // 
-            tbSerID.Location = new System.Drawing.Point(37, 253);
+            tbSerID.Location = new System.Drawing.Point(37, 244);
             tbSerID.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             tbSerID.Name = "tbSerID";
             tbSerID.Size = new System.Drawing.Size(77, 23);
@@ -292,7 +292,7 @@
             label7.AutoSize = true;
             label7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             label7.ForeColor = System.Drawing.Color.Black;
-            label7.Location = new System.Drawing.Point(164, 222);
+            label7.Location = new System.Drawing.Point(164, 213);
             label7.Name = "label7";
             label7.Size = new System.Drawing.Size(85, 15);
             label7.TabIndex = 42;
@@ -300,7 +300,7 @@
             // 
             // tbSerName
             // 
-            tbSerName.Location = new System.Drawing.Point(167, 253);
+            tbSerName.Location = new System.Drawing.Point(167, 244);
             tbSerName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             tbSerName.Name = "tbSerName";
             tbSerName.Size = new System.Drawing.Size(199, 23);
@@ -340,7 +340,7 @@
             // 
             tbDetail.Location = new System.Drawing.Point(697, 110);
             tbDetail.Name = "tbDetail";
-            tbDetail.Size = new System.Drawing.Size(340, 166);
+            tbDetail.Size = new System.Drawing.Size(340, 157);
             tbDetail.TabIndex = 47;
             tbDetail.Text = "";
             // 
@@ -369,7 +369,7 @@
             label11.AutoSize = true;
             label11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             label11.ForeColor = System.Drawing.Color.Black;
-            label11.Location = new System.Drawing.Point(423, 222);
+            label11.Location = new System.Drawing.Point(423, 213);
             label11.Name = "label11";
             label11.Size = new System.Drawing.Size(87, 15);
             label11.TabIndex = 50;
@@ -377,7 +377,7 @@
             // 
             // tbProcessStatus
             // 
-            tbProcessStatus.Location = new System.Drawing.Point(423, 253);
+            tbProcessStatus.Location = new System.Drawing.Point(423, 244);
             tbProcessStatus.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             tbProcessStatus.Name = "tbProcessStatus";
             tbProcessStatus.Size = new System.Drawing.Size(98, 23);

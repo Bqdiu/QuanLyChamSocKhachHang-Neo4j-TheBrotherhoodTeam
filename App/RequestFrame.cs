@@ -65,9 +65,19 @@ namespace App
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.RowIndex >= 0)
+            if (e.RowIndex >= 0)
             {
-                
+                DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
+                tbCusID.Text = row.Cells[0].Value.ToString();
+                tbCusName.Text = row.Cells[1].Value.ToString();
+                tbEmpID.Text = row.Cells[2].Value.ToString();
+                tbEmpName.Text = row.Cells[3].Value.ToString();
+                tbSerID.Text = row.Cells[4].Value.ToString();
+                tbSerName.Text = row.Cells[5].Value.ToString();
+                tbTitle.Text = row.Cells[6].Value.ToString();
+                tbDetail.Text = row.Cells[7].Value.ToString();
+                dtpDateCreated.Text = row.Cells[8].Value.ToString();
+                tbProcessStatus.Text = row.Cells[9].Value.ToString();
             }
         }
     }
