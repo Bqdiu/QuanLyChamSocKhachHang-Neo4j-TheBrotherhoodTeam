@@ -98,7 +98,6 @@ namespace App
             }
         }
 
-<<<<<<< HEAD
         private async void btnSave_Click(object sender, EventArgs e)
         {
             if (cbEmp.SelectedItem != null)
@@ -111,8 +110,6 @@ namespace App
                 
             }
         }
-=======
-       
->>>>>>> 45d633ef5242d8822cb33029e0b153effe4b66f2
+
     }
 }
