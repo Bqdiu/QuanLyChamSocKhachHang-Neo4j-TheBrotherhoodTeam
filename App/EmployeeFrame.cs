@@ -65,5 +65,21 @@ namespace App
                 tbEmpRole.Text = row.Cells["Chức vụ"].Value.ToString();
             }
         }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            lb_username.Visible = true;
+            lb_password.Visible = true;
+            tb_username.Visible = true;
+            tb_password.Visible = true;
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            lb_username.Visible = false;
+            lb_password.Visible = false;
+            tb_username.Visible = false;
+            tb_password.Visible = false;
+        }
     }
 }
