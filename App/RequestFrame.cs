@@ -26,6 +26,7 @@ namespace App
             await init();
             await LoadData();
             await LoadEmployeeCombobox();
+            LoadProcessStatusCombobox();
         }
 
         private async Task init()
@@ -53,8 +54,15 @@ namespace App
             if (dataGridView1.Columns.Count > 0)
             {
                 foreach (var rq in l)
-                    this.dataGridView1.Rows.Add(rq.Id, rq.CusId, rq.CusName, rq.EmpId, rq.EmpName, rq.ServiceId, rq.ServiceName, rq.Title, rq.Detail, rq.DateCreated, rq.ServiceId);
+                    this.dataGridView1.Rows.Add(rq.Id, rq.CusId, rq.CusName, rq.EmpId, rq.EmpName, rq.ServiceId, rq.ServiceName, rq.Title, rq.Detail, rq.DateCreated, rq.ProcessStatus);
             }
+        }
+        private void LoadProcessStatusCombobox()
+        {
+            cbProcessStatus.Items.Clear();
+            cbProcessStatus.Items.Add("Đang chờ");
+            cbProcessStatus.Items.Add("Đang xử lý");
+            cbProcessStatus.Items.Add("Đã hoàn thành");
         }
         private async Task LoadEmployeeCombobox()
         {
@@ -96,6 +104,7 @@ namespace App
                 tbDetail.Text = row.Cells[8].Value.ToString();
                 dtpDateCreated.Text = row.Cells[9].Value.ToString();
                 cbEmp.SelectedValue = row.Cells["Mã nhân viên"].Value.ToString();
+               
 
             }
         }
@@ -104,12 +113,12 @@ namespace App
         {
             if (cbEmp.SelectedItem != null)
             {
-                if(status == 2)
+                if (status == 2)
                 {
                     String id = cbEmp.SelectedValue.ToString();
                     N4jConnector connector = new N4jConnector();
                     var emp = new Employee { Id = id };
-                    var rq = new Request { Id = requestIdTextBox.Text, Detail = tbDetail.Text, Title = tbTitle.Text, DateCreated = dtpDateCreated.Text, ProcessStatus = "x" };
+                    var rq = new Request { Id = requestIdTextBox.Text, Detail = tbDetail.Text, Title = tbTitle.Text, DateCreated = dtpDateCreated.Text, ProcessStatus = cbProcessStatus.Text };
                     await connector.UpdateRequest(rq, emp);
                     MessageBox.Show("Updated Successfully !", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadData();

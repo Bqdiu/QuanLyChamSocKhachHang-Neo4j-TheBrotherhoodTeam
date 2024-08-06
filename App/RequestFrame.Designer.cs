@@ -38,7 +38,6 @@
             tbCusID = new System.Windows.Forms.TextBox();
             label1 = new System.Windows.Forms.Label();
             btnEdit = new System.Windows.Forms.Button();
-            btnAdd = new System.Windows.Forms.Button();
             btnDelete = new System.Windows.Forms.Button();
             btnCancel = new System.Windows.Forms.Button();
             btnSave = new System.Windows.Forms.Button();
@@ -162,7 +161,7 @@
             btnEdit.BackColor = System.Drawing.Color.FromArgb(241, 239, 231);
             btnEdit.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             btnEdit.ForeColor = System.Drawing.Color.Black;
-            btnEdit.Location = new System.Drawing.Point(183, 299);
+            btnEdit.Location = new System.Drawing.Point(47, 299);
             btnEdit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             btnEdit.Name = "btnEdit";
             btnEdit.Size = new System.Drawing.Size(128, 32);
@@ -171,25 +170,12 @@
             btnEdit.UseVisualStyleBackColor = false;
             btnEdit.Click += btnEdit_Click;
             // 
-            // btnAdd
-            // 
-            btnAdd.BackColor = System.Drawing.Color.Black;
-            btnAdd.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            btnAdd.ForeColor = System.Drawing.Color.White;
-            btnAdd.Location = new System.Drawing.Point(37, 299);
-            btnAdd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            btnAdd.Name = "btnAdd";
-            btnAdd.Size = new System.Drawing.Size(128, 32);
-            btnAdd.TabIndex = 27;
-            btnAdd.Text = "Add";
-            btnAdd.UseVisualStyleBackColor = false;
-            // 
             // btnDelete
             // 
             btnDelete.BackColor = System.Drawing.Color.LightCoral;
             btnDelete.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             btnDelete.ForeColor = System.Drawing.Color.White;
-            btnDelete.Location = new System.Drawing.Point(327, 299);
+            btnDelete.Location = new System.Drawing.Point(217, 299);
             btnDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new System.Drawing.Size(128, 32);
@@ -215,7 +201,7 @@
             btnSave.BackColor = System.Drawing.Color.Gold;
             btnSave.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             btnSave.ForeColor = System.Drawing.Color.White;
-            btnSave.Location = new System.Drawing.Point(475, 299);
+            btnSave.Location = new System.Drawing.Point(393, 299);
             btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             btnSave.Name = "btnSave";
             btnSave.Size = new System.Drawing.Size(128, 32);
@@ -433,7 +419,6 @@
             Controls.Add(btnSave);
             Controls.Add(btnCancel);
             Controls.Add(btnDelete);
-            Controls.Add(btnAdd);
             Controls.Add(btnEdit);
             Controls.Add(label1);
             Controls.Add(tbCusID);
@@ -457,7 +442,6 @@
         private System.Windows.Forms.TextBox tbCusID;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnEdit;
-        private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
