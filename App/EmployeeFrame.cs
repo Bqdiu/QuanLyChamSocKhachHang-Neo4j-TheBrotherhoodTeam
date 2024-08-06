@@ -81,12 +81,12 @@ namespace App
                 Employee result = await connector.CreateEmployee(emp);
                 if (result != null)
                 {
-                    MessageBox.Show("Added Successfully!", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                    MessageBox.Show("Added Successfully!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadData();
                 }
                 else
                 {
-                    MessageBox.Show("Add failure!", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                    MessageBox.Show("Add failure!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 status = 0;
                 lb_username.Visible = false;
@@ -101,7 +101,7 @@ namespace App
                 Employee result = await connector.UpdateEmployee(emp);
                 if (result != null)
                 {
-                    MessageBox.Show("Updated Successfully!", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                    MessageBox.Show("Updated Successfully!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadData();
                 }
                 else
@@ -143,7 +143,7 @@ namespace App
             N4jConnector connector = new N4jConnector();
             var emp = new Employee { Id = tbEmpID.Text, Name = tbEmpName.Text, DoB = dtpEmpDob.Text, Email = tbEmpEmail.Text, PhoneNumber = tbEmpPhone.Text, Address = tbEmpAddress.Text, CitizenId = tbEmpCitizenID.Text, EmployeeRole = tbEmpRole.Text, Username = tb_username.Text, Password = tb_password.Text };
             await connector.DeleteEmployee(emp);
-            MessageBox.Show("Deleted Successfully!", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+            MessageBox.Show("Deleted Successfully!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             LoadData();
 
         }
