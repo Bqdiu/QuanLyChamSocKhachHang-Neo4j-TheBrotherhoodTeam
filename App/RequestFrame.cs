@@ -102,7 +102,7 @@ namespace App
         {
             if (cbEmp.SelectedItem != null)
             {
-                String id = cbEmp.SelectedItem.ToString().Split('-')[0];
+                String id = cbEmp.SelectedValue.ToString();
                 N4jConnector connector = new N4jConnector();
                 var emp = new Employee { Id = id };
                 var rq = new Request { Id = requestIdTextBox.Text, Detail = tbDetail.Text, Title = tbTitle.Text, DateCreated = dtpDateCreated.Text, ProcessStatus = "x" };
