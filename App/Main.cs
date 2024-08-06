@@ -12,18 +12,18 @@ namespace App
 {
     public partial class Main : Form
     {
-      
+
         public Main()
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.None;
-      
+
         }
 
-     
+
         private void Main_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btn_request_Click(object sender, EventArgs e)
