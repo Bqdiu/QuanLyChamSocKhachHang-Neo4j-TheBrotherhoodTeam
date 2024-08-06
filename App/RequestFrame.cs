@@ -24,6 +24,7 @@ namespace App
         {
             await init();
             await LoadData();
+            await LoadEmployeeCombobox();
         }
 
         private async Task init()
@@ -53,6 +54,20 @@ namespace App
                     this.dataGridView1.Rows.Add(rq.Id, rq.CusId, rq.CusName, rq.EmpId, rq.EmpName, rq.ServiceId, rq.ServiceName, rq.Title, rq.Detail, rq.DateCreated, rq.ServiceId);
             }
         }
+        private async Task LoadEmployeeCombobox()
+        {
+            N4jConnector connector = new N4jConnector();
+            List<Employee> l = await connector.GetListAyncEmployees();
+            if(cbEmp.Items.Count >= 0) {
+                foreach (var e in l)
+                {
+                    this.cbEmp.Items.Add(e.Id + "-" + e.Name);
+                }
+            }
+               
+            
+           
+        }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
@@ -72,8 +87,6 @@ namespace App
                 requestIdTextBox.Text = row.Cells[0].Value.ToString();
                 tbCusID.Text = row.Cells[1].Value.ToString();
                 tbCusName.Text = row.Cells[2].Value.ToString();
-                tbEmpID.Text = row.Cells[3].Value.ToString();
-                tbEmpName.Text = row.Cells[4].Value.ToString();
                 tbSerID.Text = row.Cells[5].Value.ToString();
                 tbSerName.Text = row.Cells[6].Value.ToString();
                 tbTitle.Text = row.Cells[7].Value.ToString();
