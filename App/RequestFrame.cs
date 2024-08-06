@@ -58,15 +58,15 @@ namespace App
         {
             N4jConnector connector = new N4jConnector();
             List<Employee> l = await connector.GetListAyncEmployees();
-            if(cbEmp.Items.Count >= 0) {
-                foreach (var e in l)
-                {
-                    this.cbEmp.Items.Add(e.Id + "-" + e.Name);
-                }
+            if (cbEmp.Items.Count >= 0)
+            {
+                cbEmp.DataSource = l;
+                cbEmp.DisplayMember = "DisplayValue";
+                cbEmp.ValueMember = "Id";
             }
-               
-            
-           
+
+
+
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -84,7 +84,8 @@ namespace App
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
-                requestIdTextBox.Text = row.Cells[0].Value.ToString();
+                requestIdTextBox.Text = row.Cells[0].Value?.ToString() ?? "null";
+
                 tbCusID.Text = row.Cells[1].Value.ToString();
                 tbCusName.Text = row.Cells[2].Value.ToString();
                 tbSerID.Text = row.Cells[5].Value.ToString();
@@ -92,7 +93,11 @@ namespace App
                 tbTitle.Text = row.Cells[7].Value.ToString();
                 tbDetail.Text = row.Cells[8].Value.ToString();
                 dtpDateCreated.Text = row.Cells[9].Value.ToString();
+                cbEmp.SelectedValue = row.Cells["Mã nhân viên"].Value.ToString();
+               
             }
         }
+
+       
     }
 }

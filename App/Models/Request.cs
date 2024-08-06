@@ -19,5 +19,6 @@ namespace App.Models
         public string Detail { get; set; }
         public string DateCreated { get; set; }
         public string ProcessStatus { get; set; }
+       
     }
 }
