@@ -1,6 +1,6 @@
 ﻿namespace App
 {
-    partial class EmployeeFrame
+    partial class RequestFrame
     {
         /// <summary>
         /// Required designer variable.
@@ -42,14 +42,14 @@
             this.dataGridView1.Size = new System.Drawing.Size(958, 855);
             this.dataGridView1.TabIndex = 1;
             // 
-            // EmployeeFrame
+            // RequestFrame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(982, 879);
             this.Controls.Add(this.dataGridView1);
-            this.Name = "EmployeeFrame";
-            this.Text = "Employee";
+            this.Name = "RequestFrame";
+            this.Text = "RequestFrame";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 

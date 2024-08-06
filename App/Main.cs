@@ -12,18 +12,18 @@ namespace App
 {
     public partial class Main : Form
     {
-
+      
         public Main()
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.None;
-
+      
         }
 
-
+     
         private void Main_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void btn_request_Click(object sender, EventArgs e)
@@ -43,7 +43,7 @@ namespace App
             SendMessage(Handle, 0x112, 0xf012, 0);
         }
 
-        private async void btnHome_Click(object sender, EventArgs e)
+        private void btnHome_Click(object sender, EventArgs e)
         {
             OpenChildForm(new HomeFrame());
         }
@@ -87,6 +87,11 @@ namespace App
             panelBody.Tag = childForm;
             childForm.BringToFront();
             childForm.Show();
+        }
+
+        private void btnEmployee_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new EmployeeFrame());
         }
     }
 }
