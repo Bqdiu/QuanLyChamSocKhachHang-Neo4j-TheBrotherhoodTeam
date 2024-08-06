@@ -142,6 +142,7 @@
             button2.TabIndex = 8;
             button2.Text = "Cancel";
             button2.UseVisualStyleBackColor = false;
+            button2.Click += button2_Click_1;
             // 
             // pictureBox1
             // 
@@ -163,7 +164,8 @@
             Controls.Add(pictureBox1);
             Controls.Add(panel2);
             Name = "LoginFrame";
-            Text = "LoginFrame";
+            Text = "CUSTOMER CARE MANAGEMENT";
+            Load += LoginFrame_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
