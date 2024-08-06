@@ -344,6 +344,26 @@ namespace App.Neo4JConnector
         }
 
         [Obsolete]
+        private async Task DelRel(Request rq)
+        {
+            var driver = GraphDatabase.Driver("bolt://44.192.129.157:7687",
+                    AuthTokens.Basic("neo4j", "wholesale-liver-keyword"));
+            var cypherQuery = ""
+              + "match (rq:Request{Id:'" + rq.Id + "'})<-[r:HANDLES]-()" +
+              " delete r"
+              ;
+
+            var session = driver.AsyncSession(o => o.WithDatabase("neo4j"));
+            var result = await session.WriteTransactionAsync(async tx =>
+            {
+                var r = await tx.RunAsync(cypherQuery);
+                return await r.ToListAsync();
+            });
+
+            await session?.CloseAsync();
+        }
+
+        [Obsolete]
         public async Task<Request> UpdateRequest(Request rq, Employee emp)
         {
             var driver = GraphDatabase.Driver("bolt://44.192.129.157:7687",
@@ -352,12 +372,14 @@ namespace App.Neo4JConnector
 
             if (emp != null)
             {
+                await DelRel(rq);
                 cypherQuery = ""
               + "match (rq:Request{Id:'" + rq.Id + "'}), (e:Employee{Id:'" + emp.Id + "'}) " +
               "set rq = { Title: '" + rq.Title + "'," +
               "DateCreated: date('" + rq.DateCreated + "')," +
               "Detail: '" + rq.Detail + "'," +
-              "ProcessStatus: '" + rq.ProcessStatus + "'" +
+              "ProcessStatus: '" + rq.ProcessStatus + "'," +
+              "Id: '" + rq.Id + "'" +
               "} " +
               "create (rq)<-[r:HANDLES]-(e)"
               ;

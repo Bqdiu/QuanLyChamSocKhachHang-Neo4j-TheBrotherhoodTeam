@@ -94,5 +94,18 @@ namespace App
                 dtpDateCreated.Text = row.Cells[9].Value.ToString();
             }
         }
+
+        private async void btnSave_Click(object sender, EventArgs e)
+        {
+            if (cbEmp.SelectedItem != null)
+            {
+                String id = cbEmp.SelectedItem.ToString().Split('-')[0];
+                N4jConnector connector = new N4jConnector();
+                var emp = new Employee { Id = id };
+                var rq = new Request { Id = requestIdTextBox.Text, Detail = tbDetail.Text, Title = tbTitle.Text, DateCreated = dtpDateCreated.Text, ProcessStatus = "x" };
+                await connector.UpdateRequest(rq, emp);
+                
+            }
+        }
     }
 }
