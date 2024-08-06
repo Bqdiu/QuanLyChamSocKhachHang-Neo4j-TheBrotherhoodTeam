@@ -2,11 +2,6 @@
 using App.Neo4JConnector;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -14,6 +9,7 @@ namespace App
 {
     public partial class RequestFrame : Form
     {
+        bool isFirstLoad = true;
         int status = 0;
         public RequestFrame()
         {
@@ -68,18 +64,20 @@ namespace App
         private async Task LoadEmployeeCombobox()
         {
             N4jConnector connector = new N4jConnector();
+            List<Employee> l2 = await connector.GetListAyncEmployees();
+            l2.Add(new Employee { Id = null, Name = "All" });
+            l2.Reverse();
             List<Employee> l = await connector.GetListAyncEmployees();
             if (cbEmp.Items.Count >= 0)
             {
+                cbSort.DataSource = l2;
                 cbEmp.DataSource = l;
-                l.Add(new Employee { Id = null, Name = "All"});
-                cbSort.DataSource = l;
                 cbEmp.DisplayMember = "DisplayValue";
                 cbEmp.ValueMember = "Id";
                 cbSort.DisplayMember = "DisplayValue";
                 cbSort.ValueMember = "Id";
             }
-
+            isFirstLoad = false;
 
 
         }
@@ -109,7 +107,7 @@ namespace App
                 tbDetail.Text = row.Cells[8].Value.ToString();
                 dtpDateCreated.Text = row.Cells[9].Value.ToString();
                 cbEmp.SelectedValue = row.Cells["Mã nhân viên"].Value.ToString();
-                cbProcessStatus.Text = row.Cells["Trạng thái"].Value.ToString();
+                cbProcessStatus.Text = row.Cells[10].Value.ToString();
 
 
             }
@@ -141,24 +139,27 @@ namespace App
 
         private async void cbSort_SelectedIndexChanged(object sender, EventArgs e)
         {
-            N4jConnector connector = new N4jConnector();
-            dataGridView1.Rows.Clear();
-          
-            List<Request> l = new List<Request>();
-            if (cbSort.SelectedValue != null)
+            if (!isFirstLoad)
             {
-                String id = cbSort.SelectedValue.ToString();
-                var emp = new Employee { Id = id };
-                l = await connector.GetListAyncRequests(emp);
-            }
-           else
-            {
-                l = await connector.GetListAyncRequests();
-            }
-            if (dataGridView1.Columns.Count > 0)
-            {
-                foreach (var rq in l)
-                    this.dataGridView1.Rows.Add(rq.Id, rq.CusId, rq.CusName, rq.EmpId, rq.EmpName, rq.ServiceId, rq.ServiceName, rq.Title, rq.Detail, rq.DateCreated, rq.ProcessStatus);
+                dataGridView1.Rows.Clear();
+
+                N4jConnector connector = new N4jConnector();
+                List<Request> l = new List<Request>();
+                if (cbSort.SelectedValue != null)
+                {
+                    String id = cbSort.SelectedValue.ToString();
+                    var emp = new Employee { Id = id };
+                    l = await connector.GetListAyncRequests(emp);
+                }
+                else
+                {
+                    l = await connector.GetListAyncRequests();
+                }
+                if (dataGridView1.Columns.Count > 0)
+                {
+                    foreach (var rq in l)
+                        this.dataGridView1.Rows.Add(rq.Id, rq.CusId, rq.CusName, rq.EmpId, rq.EmpName, rq.ServiceId, rq.ServiceName, rq.Title, rq.Detail, rq.DateCreated, rq.ProcessStatus);
+                }
             }
         }
     }
