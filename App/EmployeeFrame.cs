@@ -76,8 +76,8 @@ namespace App
             if (status == 1)
             {
                 N4jConnector connector = new N4jConnector();
-                var emp = new Employee { Id = tbEmpID.Text, Name = tbEmpName.Text, DoB = dtpEmpDob.Text, Email = tbEmpEmail.Text, PhoneNumber = tbEmpPhone.Text, Address = tbEmpAddress.Text, CitizenId = "XXXXXXXXXXXXX", EmployeeRole = tbEmpRole.Text, Username = tb_username.Text, Password = tb_password.Text };
-                
+                var emp = new Employee { Id = tbEmpID.Text, Name = tbEmpName.Text, DoB = dtpEmpDob.Text, Email = tbEmpEmail.Text, PhoneNumber = tbEmpPhone.Text, Address = tbEmpAddress.Text, CitizenId = (tbEmpCitizenID.Text != "" ? tbEmpCitizenID.Text : "XXXXXXXXXXXXXXXXX"), EmployeeRole = tbEmpRole.Text, Username = tb_username.Text, Password = tb_password.Text };
+
                 Employee result = await connector.CreateEmployee(emp);
                 if (result != null)
                 {
@@ -97,11 +97,11 @@ namespace App
             else if (status == 2)
             {
                 N4jConnector connector = new N4jConnector();
-                var emp = new Employee { Id = tbEmpID.Text, Name = tbEmpName.Text, DoB = dtpEmpDob.Text, Email = tbEmpEmail.Text, PhoneNumber = tbEmpPhone.Text, Address = tbEmpAddress.Text, CitizenId = tbEmpCitizenID.Text, EmployeeRole = tbEmpRole.Text, Username = tb_username.Text, Password = tb_password.Text };
+                var emp = new Employee { Id = tbEmpID.Text, Name = tbEmpName.Text, DoB = dtpEmpDob.Text, Email = tbEmpEmail.Text, PhoneNumber = tbEmpPhone.Text, Address = (tbEmpAddress.Text != ""?tbEmpAddress.Text:"Không có"), CitizenId = tbEmpCitizenID.Text, EmployeeRole = tbEmpRole.Text, Username = tb_username.Text, Password = tb_password.Text };
                 Employee result = await connector.UpdateEmployee(emp);
                 if (result != null)
                 {
-                    MessageBox.Show("Updated Successfully!", "Thông báo",MessageBoxButtons.OKCancel,MessageBoxIcon.Information);
+                    MessageBox.Show("Updated Successfully!", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
                     LoadData();
                 }
                 else
