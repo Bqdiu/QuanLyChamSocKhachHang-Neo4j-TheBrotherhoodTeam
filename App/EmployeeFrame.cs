@@ -74,7 +74,8 @@ namespace App
             if (result != null)
             {
                 MessageBox.Show("Thêm thành công!");
-            } else
+            }
+            else
             {
                 MessageBox.Show("Thêm thất bại!");
             }
