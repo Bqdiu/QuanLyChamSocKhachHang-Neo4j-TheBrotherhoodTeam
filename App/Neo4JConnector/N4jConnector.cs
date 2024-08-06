@@ -22,8 +22,7 @@ namespace App.Neo4JConnector
             var session = driver.AsyncSession(o => o.WithDatabase("neo4j"));
             var result = await session.ReadTransactionAsync(async tx =>
             {
-                var r = await tx.RunAsync(cypherQuery,
-                        new { limit = "10" });
+                var r = await tx.RunAsync(cypherQuery);
                 return await r.ToListAsync();
             });
 

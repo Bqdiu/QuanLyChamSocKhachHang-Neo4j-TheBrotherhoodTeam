@@ -45,9 +45,6 @@ namespace App
 
         private async void btnHome_Click(object sender, EventArgs e)
         {
-            N4jConnector connector = new N4jConnector();
-            List<Customer> l = await connector.GetListAyncCustomers();
-            MessageBox.Show(l[0].Name);
             OpenChildForm(new Home());
         }
 
