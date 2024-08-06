@@ -56,6 +56,7 @@ namespace App
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+                tbEmpID.Text = row.Cells[0].Value.ToString();
                 tbEmpName.Text = row.Cells["Tên nhân viên"].Value.ToString();
                 tbEmpPhone.Text = row.Cells["Số điện thoại"].Value.ToString();
                 tbEmpEmail.Text = row.Cells["Email"].Value.ToString();

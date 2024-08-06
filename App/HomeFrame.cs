@@ -51,6 +51,7 @@ namespace App
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
+                tbCusID.Text = row.Cells["Mã khách hàng"].Value.ToString();
                 tbCusName.Text = row.Cells["Tên khách hàng"].Value.ToString();
                 tbCusPhone.Text = row.Cells["Số điện thoại"].Value.ToString();
                 tbCusEmail.Text = row.Cells["Email"].Value.ToString();
