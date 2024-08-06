@@ -82,7 +82,7 @@ namespace App.Neo4JConnector
         }
 
         [Obsolete]
-        public async Task<List<Employee>> GetListAyncEmployees()
+        public async Task<List<Service>> GetListAyncEmployees()
         {
             List<Service> l = new List<Service>();
             var driver = GraphDatabase.Driver("bolt://44.192.129.157:7687",
