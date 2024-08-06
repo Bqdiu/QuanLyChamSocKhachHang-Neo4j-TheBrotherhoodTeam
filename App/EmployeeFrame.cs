@@ -65,5 +65,19 @@ namespace App
                 tbEmpRole.Text = row.Cells["Chức vụ"].Value.ToString();
             }
         }
+
+        private async void btnSave_Click(object sender, EventArgs e)
+        {
+            N4jConnector connector = new N4jConnector();
+            var emp = new Employee { Id = "E07", Name = "huy outfit", DoB = "2001-08-15", Email = "mail@mail.com", PhoneNumber = "03699999999", Address = "Trại giam chứ đâu", CitizenId = "XXXXXXXXXXXXX", EmployeeRole = "Giám đốc", Username = "huy", Password = "123"};
+            var result = await connector.CreateEmployee(emp);
+            if (result != null)
+            {
+                MessageBox.Show("Thêm thành công!");
+            } else
+            {
+                MessageBox.Show("Thêm thất bại!");
+            }
+        }
     }
 }

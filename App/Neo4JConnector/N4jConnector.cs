@@ -186,5 +186,48 @@ namespace App.Neo4JConnector
             }
             return null;
         }
+
+        [Obsolete]
+        public async Task<Employee> CreateEmployee(Employee emp)
+        {
+            var driver = GraphDatabase.Driver("bolt://44.192.129.157:7687",
+                    AuthTokens.Basic("neo4j", "wholesale-liver-keyword"));
+            var cypherQuery =
+              "create (e:Employee{Id:'" + emp.Id + "',"+ 
+              "Name:'" + emp.Name + "',"+ 
+              "DoB:date('" + emp.DoB + "')," +
+              "Email:'" + emp.Email + "'," +
+              "PhoneNumber:'" + emp.PhoneNumber + "'," +
+              "Address:'" + emp.Address + "'," +
+              "CitizenId: '" + emp.CitizenId + "'," +
+              "EmployeeRole:'Nhân viên E1', Username:'" + emp.Username + "', Password:'" + emp.Password + "'})" +
+              " return e.Id as Id, e.Name as Name, e.DoB as DoB, e.PhoneNumber as PhoneNumber, e.Email as Email, e.Address as Address, e.CitizenId as CitizenId, e.EmployeeRole as EmployeeRole"
+              ;
+
+            var session = driver.AsyncSession(o => o.WithDatabase("neo4j"));
+            var result = await session.WriteTransactionAsync(async tx =>
+            {
+                var r = await tx.RunAsync(cypherQuery);
+                return await r.ToListAsync();
+            });
+
+            await session?.CloseAsync();
+            foreach (var row in result)
+            {
+                var employee = new Employee
+                {
+                    Id = row["Id"].As<string>(),
+                    Name = row["Name"].As<string>(),
+                    DoB = row["DoB"].As<string>(),
+                    PhoneNumber = row["PhoneNumber"].As<string>(),
+                    Email = row["Email"].As<string>(),
+                    Address = row["Address"].As<string>(),
+                    CitizenId = row["CitizenId"].As<string>(),
+                    EmployeeRole = row["EmployeeRole"].As<string>()
+                };
+                return employee;
+            }
+            return null;
+        }
     }
 }
