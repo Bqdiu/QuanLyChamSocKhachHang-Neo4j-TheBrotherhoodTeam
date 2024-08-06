@@ -156,6 +156,49 @@ namespace App.Neo4JConnector
         }
 
         [Obsolete]
+        public async Task<List<Request>> GetListAyncRequests(Employee emp)
+        {
+            List<Request> l = new List<Request>();
+            var driver = GraphDatabase.Driver("bolt://44.192.129.157:7687",
+                    AuthTokens.Basic("neo4j", "wholesale-liver-keyword"));
+            var cypherQuery =
+              "match (n:Customer)-[r:COMPLAINS]->(rq:Request), (rq)-[r2:ABOUT]->(s:Service)" +
+              " with n, r, rq, s" +
+              " match (rq)<-[:HANDLES]-(e:Employee)" +
+              " where e.Id = '" + emp.Id + "'" +
+              " return rq.Id as Id, n.Id as CusId, n.Name as CusName, e.Id as EmpId, e.Name as EmpName, s.Id as ServiceId, s.Name as ServiceName, rq.Title as Title, rq.Detail as Detail, rq.DateCreated as DateCreated, rq.ProcessStatus as ProcessStatus"
+              ;
+
+            var session = driver.AsyncSession(o => o.WithDatabase("neo4j"));
+            var result = await session.ReadTransactionAsync(async tx =>
+            {
+                var r = await tx.RunAsync(cypherQuery);
+                return await r.ToListAsync();
+            });
+
+            await session?.CloseAsync();
+            foreach (var row in result)
+            {
+                var request = new Request
+                {
+                    Id = row["Id"].As<string>(),
+                    CusId = row["CusId"].As<string>(),
+                    CusName = row["CusName"].As<string>(),
+                    EmpId = row["EmpId"].As<string>() != null ? row["EmpId"].As<string>() : "Chưa có",
+                    EmpName = row["EmpName"].As<string>() != null ? row["EmpName"].As<string>() : "Chưa có",
+                    ServiceId = row["ServiceId"].As<string>(),
+                    ServiceName = row["ServiceName"].As<string>(),
+                    Title = row["Title"].As<string>(),
+                    Detail = row["Detail"].As<string>(),
+                    DateCreated = row["DateCreated"].As<string>(),
+                    ProcessStatus = row["ProcessStatus"].As<string>(),
+                };
+                l.Add(request);
+            }
+            return l;
+        }
+
+        [Obsolete]
         public async Task<Employee> GetObjectAyncLogin(string username, string password)
         {
             var driver = GraphDatabase.Driver("bolt://44.192.129.157:7687",
