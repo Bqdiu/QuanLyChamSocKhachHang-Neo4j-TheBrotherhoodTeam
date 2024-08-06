@@ -77,7 +77,7 @@ namespace App
                 tbTitle.Text = row.Cells[6].Value.ToString();
                 tbDetail.Text = row.Cells[7].Value.ToString();
                 dtpDateCreated.Text = row.Cells[8].Value.ToString();
-                tbProcessStatus.Text = row.Cells[9].Value.ToString();
+
             }
         }
     }

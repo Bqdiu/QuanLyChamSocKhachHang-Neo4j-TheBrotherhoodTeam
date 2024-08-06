@@ -58,7 +58,9 @@
             label10 = new System.Windows.Forms.Label();
             dtpDateCreated = new System.Windows.Forms.DateTimePicker();
             label11 = new System.Windows.Forms.Label();
-            tbProcessStatus = new System.Windows.Forms.TextBox();
+            cbProcessStatus = new System.Windows.Forms.ComboBox();
+            cbSort = new System.Windows.Forms.ComboBox();
+            label12 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -87,7 +89,7 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             dataGridView1.EnableHeadersVisualStyles = false;
-            dataGridView1.Location = new System.Drawing.Point(10, 352);
+            dataGridView1.Location = new System.Drawing.Point(10, 410);
             dataGridView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             dataGridView1.MultiSelect = false;
             dataGridView1.Name = "dataGridView1";
@@ -109,7 +111,7 @@
             dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle4;
             dataGridView1.RowTemplate.Height = 29;
             dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new System.Drawing.Size(1027, 299);
+            dataGridView1.Size = new System.Drawing.Size(1027, 241);
             dataGridView1.TabIndex = 1;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
@@ -170,7 +172,7 @@
             btnEdit.BackColor = System.Drawing.Color.FromArgb(241, 239, 231);
             btnEdit.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             btnEdit.ForeColor = System.Drawing.Color.Black;
-            btnEdit.Location = new System.Drawing.Point(181, 298);
+            btnEdit.Location = new System.Drawing.Point(183, 299);
             btnEdit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             btnEdit.Name = "btnEdit";
             btnEdit.Size = new System.Drawing.Size(128, 32);
@@ -183,7 +185,7 @@
             btnAdd.BackColor = System.Drawing.Color.Black;
             btnAdd.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             btnAdd.ForeColor = System.Drawing.Color.White;
-            btnAdd.Location = new System.Drawing.Point(37, 298);
+            btnAdd.Location = new System.Drawing.Point(37, 299);
             btnAdd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new System.Drawing.Size(128, 32);
@@ -196,7 +198,7 @@
             btnDelete.BackColor = System.Drawing.Color.LightCoral;
             btnDelete.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             btnDelete.ForeColor = System.Drawing.Color.White;
-            btnDelete.Location = new System.Drawing.Point(327, 298);
+            btnDelete.Location = new System.Drawing.Point(327, 299);
             btnDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new System.Drawing.Size(128, 32);
@@ -209,7 +211,7 @@
             btnCancel.BackColor = System.Drawing.Color.Maroon;
             btnCancel.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             btnCancel.ForeColor = System.Drawing.Color.White;
-            btnCancel.Location = new System.Drawing.Point(908, 298);
+            btnCancel.Location = new System.Drawing.Point(908, 299);
             btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new System.Drawing.Size(128, 32);
@@ -222,7 +224,7 @@
             btnSave.BackColor = System.Drawing.Color.Gold;
             btnSave.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             btnSave.ForeColor = System.Drawing.Color.White;
-            btnSave.Location = new System.Drawing.Point(475, 298);
+            btnSave.Location = new System.Drawing.Point(475, 299);
             btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             btnSave.Name = "btnSave";
             btnSave.Size = new System.Drawing.Size(128, 32);
@@ -375,13 +377,33 @@
             label11.TabIndex = 50;
             label11.Text = "Process Status";
             // 
-            // tbProcessStatus
+            // cbProcessStatus
             // 
-            tbProcessStatus.Location = new System.Drawing.Point(423, 244);
-            tbProcessStatus.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            tbProcessStatus.Name = "tbProcessStatus";
-            tbProcessStatus.Size = new System.Drawing.Size(98, 23);
-            tbProcessStatus.TabIndex = 51;
+            cbProcessStatus.FormattingEnabled = true;
+            cbProcessStatus.Location = new System.Drawing.Point(423, 244);
+            cbProcessStatus.Name = "cbProcessStatus";
+            cbProcessStatus.Size = new System.Drawing.Size(98, 23);
+            cbProcessStatus.TabIndex = 51;
+            // 
+            // cbSort
+            // 
+            cbSort.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            cbSort.FormattingEnabled = true;
+            cbSort.Location = new System.Drawing.Point(13, 371);
+            cbSort.Name = "cbSort";
+            cbSort.Size = new System.Drawing.Size(1024, 23);
+            cbSort.TabIndex = 52;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label12.ForeColor = System.Drawing.Color.Black;
+            label12.Location = new System.Drawing.Point(10, 343);
+            label12.Name = "label12";
+            label12.Size = new System.Drawing.Size(51, 15);
+            label12.TabIndex = 53;
+            label12.Text = "Sort By:";
             // 
             // RequestFrame
             // 
@@ -389,7 +411,9 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackColor = System.Drawing.Color.White;
             ClientSize = new System.Drawing.Size(1048, 659);
-            Controls.Add(tbProcessStatus);
+            Controls.Add(label12);
+            Controls.Add(cbSort);
+            Controls.Add(cbProcessStatus);
             Controls.Add(label11);
             Controls.Add(dtpDateCreated);
             Controls.Add(label10);
@@ -453,6 +477,8 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.DateTimePicker dtpDateCreated;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox tbProcessStatus;
+        private System.Windows.Forms.ComboBox cbProcessStatus;
+        private System.Windows.Forms.ComboBox cbSort;
+        private System.Windows.Forms.Label label12;
     }
 }
