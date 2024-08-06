@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace App.Models
 {
-    internal class Service
+    public class Service
     {
+        public string Id { get; set; }
+        public string Name { get; set; }
     }
 }
