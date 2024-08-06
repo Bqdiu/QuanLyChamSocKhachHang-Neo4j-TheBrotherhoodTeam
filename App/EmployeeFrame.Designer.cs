@@ -201,7 +201,7 @@
             // 
             // dtpEmpDob
             // 
-            dtpEmpDob.CustomFormat = "yyyy/MM/dd";
+            dtpEmpDob.CustomFormat = "yyyy-MM-dd";
             dtpEmpDob.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             dtpEmpDob.Location = new System.Drawing.Point(588, 110);
             dtpEmpDob.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -264,6 +264,7 @@
             btnEdit.TabIndex = 25;
             btnEdit.Text = "Edit";
             btnEdit.UseVisualStyleBackColor = false;
+            btnEdit.Click += btnEdit_Click;
             // 
             // btnAdd
             // 
@@ -291,6 +292,7 @@
             btnDelete.TabIndex = 27;
             btnDelete.Text = "Delete";
             btnDelete.UseVisualStyleBackColor = false;
+            btnDelete.Click += btnDelete_Click;
             // 
             // btnSave
             // 
@@ -373,7 +375,6 @@
             // 
             // tbEmpID
             // 
-            tbEmpID.Enabled = false;
             tbEmpID.Location = new System.Drawing.Point(39, 110);
             tbEmpID.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             tbEmpID.Name = "tbEmpID";

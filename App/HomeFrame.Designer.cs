@@ -229,7 +229,7 @@
             // 
             // dtpCusDob
             // 
-            dtpCusDob.CustomFormat = "yyyy/MM/dd";
+            dtpCusDob.CustomFormat = "yyyy-MM-dd";
             dtpCusDob.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             dtpCusDob.Location = new System.Drawing.Point(565, 110);
             dtpCusDob.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
