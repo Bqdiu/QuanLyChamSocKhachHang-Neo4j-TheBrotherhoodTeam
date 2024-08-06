@@ -45,5 +45,19 @@ namespace App
                     this.dataGridView1.Rows.Add(c.Id, c.Name, c.DoB, c.Email, c.PhoneNumber, c.Address, c.CitizenId);
             }
         }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
+                tbCusName.Text = row.Cells["Tên khách hàng"].Value.ToString();
+                tbCusPhone.Text = row.Cells["Số điện thoại"].Value.ToString();
+                tbCusEmail.Text = row.Cells["Email"].Value.ToString();
+                tbCusAddress.Text = row.Cells["Địa chỉ"].Value.ToString();
+                tbCusCitizenID.Text = row.Cells["Căn cước công dân"].Value.ToString();
+                dtpCusDob.Text = row.Cells["Ngày tháng năm sinh"].Value.ToString();
+            }
+        }
     }
 }

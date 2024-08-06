@@ -50,5 +50,20 @@ namespace App
                     this.dataGridView1.Rows.Add(e.Id, e.Name, e.DoB, e.Email, e.PhoneNumber, e.Address, e.CitizenId, e.EmployeeRole);
             }
         }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+                tbEmpName.Text = row.Cells["Tên nhân viên"].Value.ToString();
+                tbEmpPhone.Text = row.Cells["Số điện thoại"].Value.ToString();
+                tbEmpEmail.Text = row.Cells["Email"].Value.ToString();
+                tbEmpAddress.Text = row.Cells["Địa chỉ"].Value.ToString();
+                tbEmpCitizenID.Text = row.Cells["Căn cước công dân"].Value.ToString();
+                dtpEmpDob.Text = row.Cells["Ngày tháng năm sinh"].Value.ToString();
+                tbEmpRole.Text = row.Cells["Chức vụ"].Value.ToString();
+            }
+        }
     }
 }

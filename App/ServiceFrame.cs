@@ -44,5 +44,17 @@ namespace App
                     this.dataGridView1.Rows.Add(s.Id, s.Name);
             }
         }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+                tbSerID.Text = row.Cells["Mã dịch vụ"].Value.ToString();
+                tbSerName.Text = row.Cells["Tên dịch vụ"].Value.ToString();
+            }
+        }
+
+
     }
 }
