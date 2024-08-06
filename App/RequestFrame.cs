@@ -57,6 +57,7 @@ namespace App
                     this.dataGridView1.Rows.Add(rq.Id, rq.CusId, rq.CusName, rq.EmpId, rq.EmpName, rq.ServiceId, rq.ServiceName, rq.Title, rq.Detail, rq.DateCreated, rq.ProcessStatus);
             }
         }
+
         private void LoadProcessStatusCombobox()
         {
             cbProcessStatus.Items.Clear();
@@ -71,8 +72,12 @@ namespace App
             if (cbEmp.Items.Count >= 0)
             {
                 cbEmp.DataSource = l;
+                l.Add(new Employee { Id = null, Name = "All"});
+                cbSort.DataSource = l;
                 cbEmp.DisplayMember = "DisplayValue";
                 cbEmp.ValueMember = "Id";
+                cbSort.DisplayMember = "DisplayValue";
+                cbSort.ValueMember = "Id";
             }
 
 
@@ -105,7 +110,7 @@ namespace App
                 dtpDateCreated.Text = row.Cells[9].Value.ToString();
                 cbEmp.SelectedValue = row.Cells["Mã nhân viên"].Value.ToString();
                 cbProcessStatus.Text = row.Cells["Trạng thái"].Value.ToString();
-               
+
 
             }
         }
@@ -132,6 +137,29 @@ namespace App
         private void btnEdit_Click(object sender, EventArgs e)
         {
             status = 2;
+        }
+
+        private async void cbSort_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            N4jConnector connector = new N4jConnector();
+            dataGridView1.Rows.Clear();
+          
+            List<Request> l = new List<Request>();
+            if (cbSort.SelectedValue != null)
+            {
+                String id = cbSort.SelectedValue.ToString();
+                var emp = new Employee { Id = id };
+                l = await connector.GetListAyncRequests(emp);
+            }
+           else
+            {
+                l = await connector.GetListAyncRequests();
+            }
+            if (dataGridView1.Columns.Count > 0)
+            {
+                foreach (var rq in l)
+                    this.dataGridView1.Rows.Add(rq.Id, rq.CusId, rq.CusName, rq.EmpId, rq.EmpName, rq.ServiceId, rq.ServiceName, rq.Title, rq.Detail, rq.DateCreated, rq.ProcessStatus);
+            }
         }
     }
 }

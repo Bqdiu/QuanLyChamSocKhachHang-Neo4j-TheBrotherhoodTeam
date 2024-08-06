@@ -352,6 +352,7 @@
             cbSort.Name = "cbSort";
             cbSort.Size = new System.Drawing.Size(1024, 23);
             cbSort.TabIndex = 52;
+            cbSort.SelectedIndexChanged += cbSort_SelectedIndexChanged;
             // 
             // label12
             // 
