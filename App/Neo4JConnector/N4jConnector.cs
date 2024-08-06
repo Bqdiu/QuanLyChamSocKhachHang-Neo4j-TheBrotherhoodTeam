@@ -121,7 +121,7 @@ namespace App.Neo4JConnector
             var cypherQuery =
               @"
               match (n:Customer)-[r:COMPLAINS]->(rq:Request), (rq)<-[r1:HANDLES]-(e:Employee), (rq)-[r2:ABOUT]->(s:Service)
-return rq.Id as Id, n.Id as CusId, n.Name as CusName, e.Id as EmpId, e.Name as EmpName, s.Id as ServiceId, s.Name as ServiceName, rq.Title as Title, rq.Detail as Detail, rq.DateCreated as DateCreated, rq.ProcessStatus as ProcessStatus              
+              return rq.Id as Id, n.Id as CusId, n.Name as CusName, e.Id as EmpId, e.Name as EmpName, s.Id as ServiceId, s.Name as ServiceName, rq.Title as Title, rq.Detail as Detail, rq.DateCreated as DateCreated, rq.ProcessStatus as ProcessStatus              
               ";
 
             var session = driver.AsyncSession(o => o.WithDatabase("neo4j"));
@@ -139,8 +139,8 @@ return rq.Id as Id, n.Id as CusId, n.Name as CusName, e.Id as EmpId, e.Name as E
                     Id = row["Id"].As<string>(),
                     CusId = row["CusId"].As<string>(),
                     CusName = row["CusName"].As<string>(),
-                    EmpId = row["EmpId"].As<string>(),
-                    EmpName = row["EmpName"].As<string>(),
+                    EmpId = row["EmpId"].As<string>() != null ? row["EmpId"].As<string>() : "Chưa có",
+                    EmpName = row["EmpName"].As<string>() != null ? row["EmpName"].As<string>() : "Chưa có",
                     ServiceId = row["ServiceId"].As<string>(),
                     ServiceName = row["ServiceName"].As<string>(),
                     Title = row["Title"].As<string>(),
@@ -298,7 +298,7 @@ return rq.Id as Id, n.Id as CusId, n.Name as CusName, e.Id as EmpId, e.Name as E
         }
 
         [Obsolete]
-        public async Task<Request> CreateRequest(Request rq)
+        public async Task<Request> CreateRequest(Request rq, Customer customer)
         {
             var driver = GraphDatabase.Driver("bolt://44.192.129.157:7687",
                     AuthTokens.Basic("neo4j", "wholesale-liver-keyword"));
@@ -344,23 +344,34 @@ return rq.Id as Id, n.Id as CusId, n.Name as CusName, e.Id as EmpId, e.Name as E
         }
 
         [Obsolete]
-        public async Task<Request> UpdateRequest(Request rq)
+        public async Task<Request> UpdateRequest(Request rq, Employee emp)
         {
             var driver = GraphDatabase.Driver("bolt://44.192.129.157:7687",
                     AuthTokens.Basic("neo4j", "wholesale-liver-keyword"));
-            var cypherQuery = "" 
-              //+ "match (e:Employee{Id:'" + emp.Id + "'}) " +
-              //"set e = {" +
-              //"Id:'" + emp.Id + "'," +
-              //"Name:'" + emp.Name + "'," +
-              //"DoB:date('" + emp.DoB + "')," +
-              //"Email:'" + emp.Email + "'," +
-              //"PhoneNumber:'" + emp.PhoneNumber + "'," +
-              //"Address:'" + emp.Address + "'," +
-              //"CitizenId: '" + emp.CitizenId + "'," +
-              //"EmployeeRole:'" + emp.EmployeeRole + "', Username:'" + emp.Username + "', Password:'" + emp.Password + "'}" +
-              //" return e.Id as Id, e.Name as Name, e.DoB as DoB, e.PhoneNumber as PhoneNumber, e.Email as Email, e.Address as Address, e.CitizenId as CitizenId, e.EmployeeRole as EmployeeRole"
+            var cypherQuery = "";
+
+            if (emp != null)
+            {
+                cypherQuery = ""
+              + "match (rq:Request{Id:'" + rq.Id + "'}), (e:Employee{Id:'" + emp.Id + "'}) " +
+              "set rq = { Title: '" + rq.Title + "'," +
+              "DateCreated: date('" + rq.DateCreated + "')," +
+              "Detail: '" + rq.Detail + "'," +
+              "ProcessStatus: '" + rq.ProcessStatus + "'" +
+              "} " +
+              "create (rq)<-[r:HANDLES]-(e)"
               ;
+            }
+            else
+            {
+                cypherQuery = ""
+              + "match (rq:Request{Id:'" + rq.Id + "'}) " +
+              "set rq = { Title: '" + rq.Title + "'," +
+              "DateCreated: date('" + rq.DateCreated + "')," +
+              "Detail: '" + rq.Detail + "'," +
+              "ProcessStatus: '" + rq.ProcessStatus + "'" +
+              "}";
+            }
 
             var session = driver.AsyncSession(o => o.WithDatabase("neo4j"));
             var result = await session.WriteTransactionAsync(async tx =>
