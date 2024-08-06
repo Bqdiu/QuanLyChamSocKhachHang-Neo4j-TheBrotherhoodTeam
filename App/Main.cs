@@ -45,7 +45,7 @@ namespace App
 
         private async void btnHome_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new Home());
+            OpenChildForm(new HomeFrame());
         }
 
 
