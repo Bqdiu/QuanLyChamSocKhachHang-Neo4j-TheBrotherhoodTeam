@@ -30,7 +30,7 @@ namespace App
         {
             this.dataGridView1.Columns.Clear();
             this.dataGridView1.Columns.Add("Mã nhân viên", "Mã nhân viên");
-            this.dataGridView1.Columns.Add("Tên khách hàng", "Tên khách hàng");
+            this.dataGridView1.Columns.Add("Tên nhân viên", "Tên nhân viên");
             this.dataGridView1.Columns.Add("Ngày tháng năm sinh", "Ngày tháng năm sinh");
             this.dataGridView1.Columns.Add("Số điện thoại", "Số điện thoại");
             this.dataGridView1.Columns.Add("Email", "Email");

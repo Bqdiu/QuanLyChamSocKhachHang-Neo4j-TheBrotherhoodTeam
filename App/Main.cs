@@ -93,5 +93,15 @@ namespace App
         {
             OpenChildForm(new EmployeeFrame());
         }
+
+        private void btnServices_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new ServiceFrame());
+        }
+
+        private void btnRequest_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new RequestFrame());
+        }
     }
 }
