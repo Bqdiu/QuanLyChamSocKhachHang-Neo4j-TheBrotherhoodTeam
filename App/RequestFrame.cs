@@ -29,6 +29,7 @@ namespace App
         private async Task init()
         {
             this.dataGridView1.Columns.Clear();
+            this.dataGridView1.Columns.Add("Mã yêu cầu", "Mã yêu cầu");
             this.dataGridView1.Columns.Add("Mã khách hàng", "Mã khách hàng");
             this.dataGridView1.Columns.Add("Tên khách hàng", "Tên khách hàng");
             this.dataGridView1.Columns.Add("Mã nhân viên", "Mã nhân viên");
@@ -49,7 +50,7 @@ namespace App
             if (dataGridView1.Columns.Count > 0)
             {
                 foreach (var rq in l)
-                    this.dataGridView1.Rows.Add(rq.CusId, rq.CusName, rq.EmpId, rq.EmpName, rq.ServiceId, rq.ServiceName, rq.Title, rq.Detail, rq.DateCreated, rq.ServiceId);
+                    this.dataGridView1.Rows.Add(rq.Id, rq.CusId, rq.CusName, rq.EmpId, rq.EmpName, rq.ServiceId, rq.ServiceName, rq.Title, rq.Detail, rq.DateCreated, rq.ServiceId);
             }
         }
 
@@ -68,16 +69,16 @@ namespace App
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
-                tbCusID.Text = row.Cells[0].Value.ToString();
-                tbCusName.Text = row.Cells[1].Value.ToString();
-                tbEmpID.Text = row.Cells[2].Value.ToString();
-                tbEmpName.Text = row.Cells[3].Value.ToString();
-                tbSerID.Text = row.Cells[4].Value.ToString();
-                tbSerName.Text = row.Cells[5].Value.ToString();
-                tbTitle.Text = row.Cells[6].Value.ToString();
-                tbDetail.Text = row.Cells[7].Value.ToString();
-                dtpDateCreated.Text = row.Cells[8].Value.ToString();
-
+                requestIdTextBox.Text = row.Cells[0].Value.ToString();
+                tbCusID.Text = row.Cells[1].Value.ToString();
+                tbCusName.Text = row.Cells[2].Value.ToString();
+                tbEmpID.Text = row.Cells[3].Value.ToString();
+                tbEmpName.Text = row.Cells[4].Value.ToString();
+                tbSerID.Text = row.Cells[5].Value.ToString();
+                tbSerName.Text = row.Cells[6].Value.ToString();
+                tbTitle.Text = row.Cells[7].Value.ToString();
+                tbDetail.Text = row.Cells[8].Value.ToString();
+                dtpDateCreated.Text = row.Cells[9].Value.ToString();
             }
         }
     }

@@ -120,7 +120,8 @@ namespace App.Neo4JConnector
                     AuthTokens.Basic("neo4j", "wholesale-liver-keyword"));
             var cypherQuery =
               @"
-              match (rq:Request) return rq.CusId as CusId, rq.CusName as CusName, rq.EmpId as EmpId, rq.EmpName as EmpName, rq.ServiceId as ServiceId, rq.ServiceName as ServiceName, rq.Title as Title, rq.Detail as Detail, rq.DateCreated as DateCreated, rq.ProcessStatus as ProcessStatus 
+              match (n:Customer)-[r:COMPLAINS]->(rq:Request), (rq)<-[r1:HANDLES]-(e:Employee), (rq)-[r2:ABOUT]->(s:Service)
+return rq.Id as Id, n.Id as CusId, n.Name as CusName, e.Id as EmpId, e.Name as EmpName, s.Id as ServiceId, s.Name as ServiceName, rq.Title as Title, rq.Detail as Detail, rq.DateCreated as DateCreated, rq.ProcessStatus as ProcessStatus              
               ";
 
             var session = driver.AsyncSession(o => o.WithDatabase("neo4j"));
@@ -135,6 +136,7 @@ namespace App.Neo4JConnector
             {
                 var request = new Request
                 {
+                    Id = row["Id"].As<string>(),
                     CusId = row["CusId"].As<string>(),
                     CusName = row["CusName"].As<string>(),
                     EmpId = row["EmpId"].As<string>(),
@@ -193,8 +195,8 @@ namespace App.Neo4JConnector
             var driver = GraphDatabase.Driver("bolt://44.192.129.157:7687",
                     AuthTokens.Basic("neo4j", "wholesale-liver-keyword"));
             var cypherQuery =
-              "create (e:Employee{Id:'" + emp.Id + "',"+ 
-              "Name:'" + emp.Name + "',"+ 
+              "create (e:Employee{Id:'" + emp.Id + "'," +
+              "Name:'" + emp.Name + "'," +
               "DoB:date('" + emp.DoB + "')," +
               "Email:'" + emp.Email + "'," +
               "PhoneNumber:'" + emp.PhoneNumber + "'," +
@@ -238,7 +240,7 @@ namespace App.Neo4JConnector
             var cypherQuery =
               "match (e:Employee{Id:'" + emp.Id + "'}) " +
               "set e = {" +
-              "Id:'" + emp.Id + "'," + 
+              "Id:'" + emp.Id + "'," +
               "Name:'" + emp.Name + "'," +
               "DoB:date('" + emp.DoB + "')," +
               "Email:'" + emp.Email + "'," +
@@ -283,7 +285,121 @@ namespace App.Neo4JConnector
             var cypherQuery =
               "match (e:Employee{Id:'" + emp.Id + "'}) " +
               "detach delete e";
+            ;
+
+            var session = driver.AsyncSession(o => o.WithDatabase("neo4j"));
+            var result = await session.WriteTransactionAsync(async tx =>
+            {
+                var r = await tx.RunAsync(cypherQuery);
+                return await r.ToListAsync();
+            });
+
+            await session?.CloseAsync();
+        }
+
+        [Obsolete]
+        public async Task<Request> CreateRequest(Request rq)
+        {
+            var driver = GraphDatabase.Driver("bolt://44.192.129.157:7687",
+                    AuthTokens.Basic("neo4j", "wholesale-liver-keyword"));
+            var cypherQuery = ""
+              //+ "create (rq:Request{Id:'" + rq.Id + "'," +
+              //"CusId:'" + emp.Name + "'," +
+              //"DoB:date('" + emp.DoB + "')," +
+              //"Email:'" + emp.Email + "'," +
+              //"PhoneNumber:'" + emp.PhoneNumber + "'," +
+              //"Address:'" + emp.Address + "'," +
+              //"CitizenId: '" + emp.CitizenId + "'," +
+              //"EmployeeRole:'Nhân viên E1', Username:'" + emp.Username + "', Password:'" + emp.Password + "'})" +
+              //" return e.Id as Id, e.Name as Name, e.DoB as DoB, e.PhoneNumber as PhoneNumber, e.Email as Email, e.Address as Address, e.CitizenId as CitizenId, e.EmployeeRole as EmployeeRole"
               ;
+
+            var session = driver.AsyncSession(o => o.WithDatabase("neo4j"));
+            var result = await session.WriteTransactionAsync(async tx =>
+            {
+                var r = await tx.RunAsync(cypherQuery);
+                return await r.ToListAsync();
+            });
+
+            await session?.CloseAsync();
+            foreach (var row in result)
+            {
+                var request = new Request
+                {
+                    Id = row["Id"].As<string>(),
+                    CusId = row["CusId"].As<string>(),
+                    CusName = row["CusName"].As<string>(),
+                    EmpId = row["EmpId"].As<string>(),
+                    EmpName = row["EmpName"].As<string>(),
+                    ServiceId = row["ServiceId"].As<string>(),
+                    ServiceName = row["ServiceName"].As<string>(),
+                    Title = row["Title"].As<string>(),
+                    Detail = row["Detail"].As<string>(),
+                    DateCreated = row["DateCreated"].As<string>(),
+                    ProcessStatus = row["ProcessStatus"].As<string>(),
+                };
+                return request;
+            }
+            return null;
+        }
+
+        [Obsolete]
+        public async Task<Request> UpdateRequest(Request rq)
+        {
+            var driver = GraphDatabase.Driver("bolt://44.192.129.157:7687",
+                    AuthTokens.Basic("neo4j", "wholesale-liver-keyword"));
+            var cypherQuery = "" 
+              //+ "match (e:Employee{Id:'" + emp.Id + "'}) " +
+              //"set e = {" +
+              //"Id:'" + emp.Id + "'," +
+              //"Name:'" + emp.Name + "'," +
+              //"DoB:date('" + emp.DoB + "')," +
+              //"Email:'" + emp.Email + "'," +
+              //"PhoneNumber:'" + emp.PhoneNumber + "'," +
+              //"Address:'" + emp.Address + "'," +
+              //"CitizenId: '" + emp.CitizenId + "'," +
+              //"EmployeeRole:'" + emp.EmployeeRole + "', Username:'" + emp.Username + "', Password:'" + emp.Password + "'}" +
+              //" return e.Id as Id, e.Name as Name, e.DoB as DoB, e.PhoneNumber as PhoneNumber, e.Email as Email, e.Address as Address, e.CitizenId as CitizenId, e.EmployeeRole as EmployeeRole"
+              ;
+
+            var session = driver.AsyncSession(o => o.WithDatabase("neo4j"));
+            var result = await session.WriteTransactionAsync(async tx =>
+            {
+                var r = await tx.RunAsync(cypherQuery);
+                return await r.ToListAsync();
+            });
+
+            await session?.CloseAsync();
+            foreach (var row in result)
+            {
+                var request = new Request
+                {
+                    Id = row["Id"].As<string>(),
+                    CusId = row["CusId"].As<string>(),
+                    CusName = row["CusName"].As<string>(),
+                    EmpId = row["EmpId"].As<string>(),
+                    EmpName = row["EmpName"].As<string>(),
+                    ServiceId = row["ServiceId"].As<string>(),
+                    ServiceName = row["ServiceName"].As<string>(),
+                    Title = row["Title"].As<string>(),
+                    Detail = row["Detail"].As<string>(),
+                    DateCreated = row["DateCreated"].As<string>(),
+                    ProcessStatus = row["ProcessStatus"].As<string>(),
+                };
+                return request;
+            }
+            return null;
+        }
+
+        [Obsolete]
+        public async Task DeleteRequest(Request rq)
+        {
+            var driver = GraphDatabase.Driver("bolt://44.192.129.157:7687",
+                    AuthTokens.Basic("neo4j", "wholesale-liver-keyword"));
+            var cypherQuery =
+              "match (rq:Request{Id:'" + rq.Id + "'}) " +
+              "detach delete rq";
+            ;
 
             var session = driver.AsyncSession(o => o.WithDatabase("neo4j"));
             var result = await session.WriteTransactionAsync(async tx =>

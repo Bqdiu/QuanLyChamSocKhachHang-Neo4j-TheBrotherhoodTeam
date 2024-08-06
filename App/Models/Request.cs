@@ -8,6 +8,7 @@ namespace App.Models
 {
     public class Request
     {
+        public string Id { get; set; }
         public string CusId { get; set; }
         public string CusName { get; set; }
         public string EmpId { get; set; }
