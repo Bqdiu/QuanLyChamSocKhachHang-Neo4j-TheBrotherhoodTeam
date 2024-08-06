@@ -12,23 +12,24 @@ namespace App
 {
     public partial class Main : Form
     {
-      
+
         public Main()
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.None;
-      
+
         }
 
-     
+
         private void Main_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btn_request_Click(object sender, EventArgs e)
         {
 
+            OpenChildForm(new ServiceFrame());
         }
 
 
@@ -85,9 +86,11 @@ namespace App
             childForm.Dock = DockStyle.Fill;
             panelBody.Controls.Add(childForm);
             panelBody.Tag = childForm;
+
             childForm.BringToFront();
             childForm.Show();
         }
+
 
         private void btnEmployee_Click(object sender, EventArgs e)
         {
@@ -103,5 +106,6 @@ namespace App
         {
             OpenChildForm(new RequestFrame());
         }
+
     }
 }
