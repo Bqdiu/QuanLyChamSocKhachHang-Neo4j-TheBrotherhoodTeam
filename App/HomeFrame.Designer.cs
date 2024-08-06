@@ -1,6 +1,6 @@
 ﻿namespace App
 {
-    partial class Home
+    partial class HomeFrame
     {
         /// <summary>
         /// Required designer variable.

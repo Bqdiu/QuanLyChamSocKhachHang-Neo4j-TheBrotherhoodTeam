@@ -7,9 +7,9 @@ using System.Windows.Forms;
 
 namespace App
 {
-    public partial class Home : Form
+    public partial class HomeFrame : Form
     {
-        public Home()
+        public HomeFrame()
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.None;

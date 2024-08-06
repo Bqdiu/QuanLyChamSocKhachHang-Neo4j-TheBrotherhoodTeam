@@ -45,9 +45,9 @@ namespace App.Neo4JConnector
         }
 
         [Obsolete]
-        public async Task<List<EmployeeFrame>> GetListAyncServices()
+        public async Task<List<Employee>> GetListAyncServices()
         {
-            List<EmployeeFrame> l = new List<EmployeeFrame>();
+            List<Employee> l = new List<Employee>();
             var driver = GraphDatabase.Driver("bolt://44.192.129.157:7687",
                     AuthTokens.Basic("neo4j", "wholesale-liver-keyword"));
             var cypherQuery =
@@ -65,7 +65,7 @@ namespace App.Neo4JConnector
             await session?.CloseAsync();
             foreach (var row in result)
             {
-                var employee = new EmployeeFrame
+                var employee = new Employee
                 {
                     Id = row["Id"].As<string>(),
                     Name = row["Name"].As<string>(),
