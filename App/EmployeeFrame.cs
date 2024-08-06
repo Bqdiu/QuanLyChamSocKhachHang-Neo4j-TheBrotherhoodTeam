@@ -6,6 +6,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.NetworkInformation;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,6 +16,7 @@ namespace App
 {
     public partial class EmployeeFrame : Form
     {
+        int status = 0;
         public EmployeeFrame()
         {
             InitializeComponent();
@@ -43,6 +46,7 @@ namespace App
         private async Task LoadData()
         {
             N4jConnector connector = new N4jConnector();
+            dataGridView1.Rows.Clear();
             List<Employee> l = await connector.GetListAyncEmployees();
             if (dataGridView1.Columns.Count > 0)
             {
@@ -56,6 +60,7 @@ namespace App
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+                tbEmpID.Text = row.Cells[0].Value.ToString();
                 tbEmpName.Text = row.Cells["Tên nhân viên"].Value.ToString();
                 tbEmpPhone.Text = row.Cells["Số điện thoại"].Value.ToString();
                 tbEmpEmail.Text = row.Cells["Email"].Value.ToString();
@@ -68,17 +73,55 @@ namespace App
 
         private async void btnSave_Click(object sender, EventArgs e)
         {
-            N4jConnector connector = new N4jConnector();
-            var emp = new Employee { Id = "E02", Name = "huy outfix", DoB = "2001-08-15", Email = "mail@mail.com", PhoneNumber = "03699999999", Address = "Trại giam chứ đâu", CitizenId = "XXXXXXXXXXXXX", EmployeeRole = "Giám đốc", Username = "huy", Password = "123" };
-            await connector.DeleteEmployee(emp);
+            if (status == 1)
+            {
+                N4jConnector connector = new N4jConnector();
+                var emp = new Employee { Id = tbEmpID.Text, Name = tbEmpName.Text, DoB = dtpEmpDob.Text, Email = tbEmpEmail.Text, PhoneNumber = tbEmpPhone.Text, Address = tbEmpAddress.Text, CitizenId = "XXXXXXXXXXXXX", EmployeeRole = tbEmpRole.Text, Username = tb_username.Text, Password = tb_password.Text };
+                
+                Employee result = await connector.CreateEmployee(emp);
+                if (result != null)
+                {
+                    MessageBox.Show("Added Successfully!", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                    LoadData();
+                }
+                else
+                {
+                    MessageBox.Show("Add failure!", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                }
+                status = 0;
+                lb_username.Visible = false;
+                lb_password.Visible = false;
+                tb_username.Visible = false;
+                tb_password.Visible = false;
+            }
+            else if (status == 2)
+            {
+                N4jConnector connector = new N4jConnector();
+                var emp = new Employee { Id = tbEmpID.Text, Name = tbEmpName.Text, DoB = dtpEmpDob.Text, Email = tbEmpEmail.Text, PhoneNumber = tbEmpPhone.Text, Address = tbEmpAddress.Text, CitizenId = tbEmpCitizenID.Text, EmployeeRole = tbEmpRole.Text, Username = tb_username.Text, Password = tb_password.Text };
+                Employee result = await connector.UpdateEmployee(emp);
+                if (result != null)
+                {
+                    MessageBox.Show("Updated Successfully!", "Thông báo",MessageBoxButtons.OKCancel,MessageBoxIcon.Information);
+                    LoadData();
+                }
+                else
+                {
+                    MessageBox.Show("Update failure!", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                }
+                status = 0;
+            }
+
+
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+
             lb_username.Visible = true;
             lb_password.Visible = true;
             tb_username.Visible = true;
             tb_password.Visible = true;
+            status = 1;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -87,6 +130,22 @@ namespace App
             lb_password.Visible = false;
             tb_username.Visible = false;
             tb_password.Visible = false;
+            status = 0;
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            status = 2;
+        }
+
+        private async void btnDelete_Click(object sender, EventArgs e)
+        {
+            N4jConnector connector = new N4jConnector();
+            var emp = new Employee { Id = tbEmpID.Text, Name = tbEmpName.Text, DoB = dtpEmpDob.Text, Email = tbEmpEmail.Text, PhoneNumber = tbEmpPhone.Text, Address = tbEmpAddress.Text, CitizenId = tbEmpCitizenID.Text, EmployeeRole = tbEmpRole.Text, Username = tb_username.Text, Password = tb_password.Text };
+            await connector.DeleteEmployee(emp);
+            MessageBox.Show("Deleted Successfully!", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+            LoadData();
+
         }
     }
 }

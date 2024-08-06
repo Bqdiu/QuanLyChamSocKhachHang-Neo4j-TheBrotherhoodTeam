@@ -57,6 +57,8 @@
             lb_username = new System.Windows.Forms.Label();
             tb_password = new System.Windows.Forms.TextBox();
             lb_password = new System.Windows.Forms.Label();
+            label9 = new System.Windows.Forms.Label();
+            tbEmpID = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -125,7 +127,7 @@
             label3.AutoSize = true;
             label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             label3.ForeColor = System.Drawing.Color.Black;
-            label3.Location = new System.Drawing.Point(37, 84);
+            label3.Location = new System.Drawing.Point(108, 84);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(40, 15);
             label3.TabIndex = 3;
@@ -165,7 +167,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            label4.Location = new System.Drawing.Point(37, 152);
+            label4.Location = new System.Drawing.Point(39, 152);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(42, 15);
             label4.TabIndex = 15;
@@ -183,10 +185,10 @@
             // 
             // tbEmpName
             // 
-            tbEmpName.Location = new System.Drawing.Point(37, 110);
+            tbEmpName.Location = new System.Drawing.Point(108, 110);
             tbEmpName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             tbEmpName.Name = "tbEmpName";
-            tbEmpName.Size = new System.Drawing.Size(229, 23);
+            tbEmpName.Size = new System.Drawing.Size(158, 23);
             tbEmpName.TabIndex = 17;
             // 
             // tbEmpCitizenID
@@ -199,7 +201,7 @@
             // 
             // dtpEmpDob
             // 
-            dtpEmpDob.CustomFormat = "yyyy/MM/dd";
+            dtpEmpDob.CustomFormat = "yyyy-MM-dd";
             dtpEmpDob.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             dtpEmpDob.Location = new System.Drawing.Point(588, 110);
             dtpEmpDob.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -218,7 +220,7 @@
             // 
             // tbEmpPhone
             // 
-            tbEmpPhone.Location = new System.Drawing.Point(37, 180);
+            tbEmpPhone.Location = new System.Drawing.Point(39, 180);
             tbEmpPhone.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             tbEmpPhone.Name = "tbEmpPhone";
             tbEmpPhone.Size = new System.Drawing.Size(229, 23);
@@ -244,7 +246,7 @@
             // 
             // tbEmpRole
             // 
-            tbEmpRole.Location = new System.Drawing.Point(593, 181);
+            tbEmpRole.Location = new System.Drawing.Point(593, 180);
             tbEmpRole.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             tbEmpRole.Name = "tbEmpRole";
             tbEmpRole.Size = new System.Drawing.Size(146, 23);
@@ -262,6 +264,7 @@
             btnEdit.TabIndex = 25;
             btnEdit.Text = "Edit";
             btnEdit.UseVisualStyleBackColor = false;
+            btnEdit.Click += btnEdit_Click;
             // 
             // btnAdd
             // 
@@ -289,6 +292,7 @@
             btnDelete.TabIndex = 27;
             btnDelete.Text = "Delete";
             btnDelete.UseVisualStyleBackColor = false;
+            btnDelete.Click += btnDelete_Click;
             // 
             // btnSave
             // 
@@ -320,7 +324,7 @@
             // 
             // tb_username
             // 
-            tb_username.Location = new System.Drawing.Point(37, 242);
+            tb_username.Location = new System.Drawing.Point(39, 242);
             tb_username.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             tb_username.Name = "tb_username";
             tb_username.Size = new System.Drawing.Size(229, 23);
@@ -331,7 +335,7 @@
             // 
             lb_username.AutoSize = true;
             lb_username.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            lb_username.Location = new System.Drawing.Point(37, 214);
+            lb_username.Location = new System.Drawing.Point(39, 214);
             lb_username.Name = "lb_username";
             lb_username.Size = new System.Drawing.Size(67, 15);
             lb_username.TabIndex = 36;
@@ -351,12 +355,31 @@
             // 
             lb_password.AutoSize = true;
             lb_password.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            lb_password.Location = new System.Drawing.Point(318, 214);
+            lb_password.Location = new System.Drawing.Point(317, 214);
             lb_password.Name = "lb_password";
             lb_password.Size = new System.Drawing.Size(59, 15);
             lb_password.TabIndex = 38;
             lb_password.Text = "Password";
             lb_password.Visible = false;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label9.ForeColor = System.Drawing.Color.Black;
+            label9.Location = new System.Drawing.Point(39, 84);
+            label9.Name = "label9";
+            label9.Size = new System.Drawing.Size(20, 15);
+            label9.TabIndex = 40;
+            label9.Text = "ID";
+            // 
+            // tbEmpID
+            // 
+            tbEmpID.Location = new System.Drawing.Point(39, 110);
+            tbEmpID.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            tbEmpID.Name = "tbEmpID";
+            tbEmpID.Size = new System.Drawing.Size(59, 23);
+            tbEmpID.TabIndex = 41;
             // 
             // EmployeeFrame
             // 
@@ -364,6 +387,8 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackColor = System.Drawing.Color.White;
             ClientSize = new System.Drawing.Size(1048, 659);
+            Controls.Add(tbEmpID);
+            Controls.Add(label9);
             Controls.Add(tb_password);
             Controls.Add(lb_password);
             Controls.Add(tb_username);
@@ -424,5 +449,7 @@
         private System.Windows.Forms.Label lb_username;
         private System.Windows.Forms.TextBox tb_password;
         private System.Windows.Forms.Label lb_password;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox tbEmpID;
     }
 }
