@@ -58,6 +58,7 @@ namespace App
                 tbCusAddress.Text = row.Cells["Địa chỉ"].Value.ToString();
                 tbCusCitizenID.Text = row.Cells["Căn cước công dân"].Value.ToString();
                 dtpCusDob.Text = row.Cells["Ngày tháng năm sinh"].Value.ToString();
+                
             }
         }
     }

@@ -104,6 +104,7 @@ namespace App
                 tbDetail.Text = row.Cells[8].Value.ToString();
                 dtpDateCreated.Text = row.Cells[9].Value.ToString();
                 cbEmp.SelectedValue = row.Cells["Mã nhân viên"].Value.ToString();
+                cbProcessStatus.Text = row.Cells["Trạng thái"].Value.ToString();
                
 
             }
