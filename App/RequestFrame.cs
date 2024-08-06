@@ -107,7 +107,7 @@ namespace App
                 var emp = new Employee { Id = id };
                 var rq = new Request { Id = requestIdTextBox.Text, Detail = tbDetail.Text, Title = tbTitle.Text, DateCreated = dtpDateCreated.Text, ProcessStatus = "x" };
                 await connector.UpdateRequest(rq, emp);
-                MessageBox.Show("Updated Successfully !",,MessageBoxButtons.OK,MessageBoxIcon.Information);
+                MessageBox.Show("Updated Successfully !","Message",MessageBoxButtons.OK,MessageBoxIcon.Information);
             }
         }
     }
