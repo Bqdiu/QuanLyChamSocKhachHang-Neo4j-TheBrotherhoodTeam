@@ -14,6 +14,7 @@ namespace App
 {
     public partial class RequestFrame : Form
     {
+        int status = 0;
         public RequestFrame()
         {
             InitializeComponent();
@@ -47,6 +48,7 @@ namespace App
         private async Task LoadData()
         {
             N4jConnector connector = new N4jConnector();
+            dataGridView1.Rows.Clear();
             List<Request> l = await connector.GetListAyncRequests();
             if (dataGridView1.Columns.Count > 0)
             {
@@ -94,7 +96,7 @@ namespace App
                 tbDetail.Text = row.Cells[8].Value.ToString();
                 dtpDateCreated.Text = row.Cells[9].Value.ToString();
                 cbEmp.SelectedValue = row.Cells["Mã nhân viên"].Value.ToString();
-               
+
             }
         }
 
@@ -102,13 +104,24 @@ namespace App
         {
             if (cbEmp.SelectedItem != null)
             {
-                String id = cbEmp.SelectedValue.ToString();
-                N4jConnector connector = new N4jConnector();
-                var emp = new Employee { Id = id };
-                var rq = new Request { Id = requestIdTextBox.Text, Detail = tbDetail.Text, Title = tbTitle.Text, DateCreated = dtpDateCreated.Text, ProcessStatus = "x" };
-                await connector.UpdateRequest(rq, emp);
-                MessageBox.Show("Updated Successfully !","Message",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                if(status == 2)
+                {
+                    String id = cbEmp.SelectedValue.ToString();
+                    N4jConnector connector = new N4jConnector();
+                    var emp = new Employee { Id = id };
+                    var rq = new Request { Id = requestIdTextBox.Text, Detail = tbDetail.Text, Title = tbTitle.Text, DateCreated = dtpDateCreated.Text, ProcessStatus = "x" };
+                    await connector.UpdateRequest(rq, emp);
+                    MessageBox.Show("Updated Successfully !", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadData();
+                }
+                status = 0;
             }
+
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            status = 2;
         }
     }
 }
