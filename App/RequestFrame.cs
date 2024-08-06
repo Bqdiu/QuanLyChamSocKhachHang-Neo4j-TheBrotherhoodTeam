@@ -62,5 +62,13 @@ namespace App
         {
 
         }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.RowIndex >= 0)
+            {
+                
+            }
+        }
     }
 }
