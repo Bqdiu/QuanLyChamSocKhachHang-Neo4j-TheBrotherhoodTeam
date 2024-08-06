@@ -98,7 +98,6 @@ namespace App
             }
         }
 
-<<<<<<< HEAD
         private async void btnSave_Click(object sender, EventArgs e)
         {
             if (cbEmp.SelectedItem != null)
@@ -108,11 +107,7 @@ namespace App
                 var emp = new Employee { Id = id };
                 var rq = new Request { Id = requestIdTextBox.Text, Detail = tbDetail.Text, Title = tbTitle.Text, DateCreated = dtpDateCreated.Text, ProcessStatus = "x" };
                 await connector.UpdateRequest(rq, emp);
-                
             }
         }
-=======
-       
->>>>>>> 45d633ef5242d8822cb33029e0b153effe4b66f2
     }
 }

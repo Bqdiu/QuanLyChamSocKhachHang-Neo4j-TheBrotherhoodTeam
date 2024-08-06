@@ -120,7 +120,9 @@ namespace App.Neo4JConnector
                     AuthTokens.Basic("neo4j", "wholesale-liver-keyword"));
             var cypherQuery =
               @"
-              match (n:Customer)-[r:COMPLAINS]->(rq:Request), (rq)<-[r1:HANDLES]-(e:Employee), (rq)-[r2:ABOUT]->(s:Service)
+              match (n:Customer)-[r:COMPLAINS]->(rq:Request), (rq)-[r2:ABOUT]->(s:Service)
+              with n, r, rq, s
+              optional match (rq)<-[:HANDLES]-(e:Employee)
               return rq.Id as Id, n.Id as CusId, n.Name as CusName, e.Id as EmpId, e.Name as EmpName, s.Id as ServiceId, s.Name as ServiceName, rq.Title as Title, rq.Detail as Detail, rq.DateCreated as DateCreated, rq.ProcessStatus as ProcessStatus              
               ";
 
