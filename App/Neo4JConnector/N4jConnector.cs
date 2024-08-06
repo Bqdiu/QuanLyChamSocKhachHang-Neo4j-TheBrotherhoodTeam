@@ -158,7 +158,7 @@ namespace App.Neo4JConnector
                     AuthTokens.Basic("neo4j", "wholesale-liver-keyword"));
             var cypherQuery =
               @"
-              match (e:Employee{Username:'" + username + "', Password:'" + password + "'}) return e"
+              match (e:Employee{Username:'" + username + "', Password:'" + password + "'}) return e.Id as Id, e.Name as Name, e.DoB as DoB, e.PhoneNumber as PhoneNumber, e.Email as Email, e.Address as Address, e.CitizenId as CitizenId, e.EmployeeRole as EmployeeRole"
               ;
 
             var session = driver.AsyncSession(o => o.WithDatabase("neo4j"));

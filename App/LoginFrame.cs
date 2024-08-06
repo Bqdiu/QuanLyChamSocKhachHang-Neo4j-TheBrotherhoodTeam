@@ -1,4 +1,6 @@
-﻿using System;
+﻿using App.Models;
+using App.Neo4JConnector;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -45,6 +47,24 @@ namespace App
         private void pictureBox1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private async void loginButton_Click(object sender, EventArgs e)
+        {
+            string username = usernameTextBox.Text;
+            string password = passwordTextBox.Text;
+            N4jConnector connector = new N4jConnector();
+            Employee emp = await connector.GetObjectAyncLogin(username, password);
+            if (emp != null)
+            {
+                Main mainForm = new Main();
+                mainForm.Show();
+                this.Visible = false;
+            }
+            else
+            {
+                MessageBox.Show("Đăng nhập thất bại!");
+            }
         }
     }
 }
